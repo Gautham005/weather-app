@@ -1,0 +1,28 @@
+# Python and env modules, packages
+__pycache__/
+packages/
+.venv/
+.idea/
+.cache/
+*.env
+
+# dbt modules
+transform/target/
+transform/dbt_packages/
+transform/logs/
+transform/dbt_modules/
+
+# Database and Cache modules
+*.duckdb
+*.db
+data/
+
+# OS Specific
+Thumbs.db
+*.tmp
+
+# Miscellaneous
+*.log
+*.csv
+
+

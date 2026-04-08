@@ -1,0 +1,11 @@
+# Data Ingestion & API
+requests
+geopy
+pandas
+
+# Transformation & Warehouse
+dbt-duckdb
+duckdb
+
+# Utility
+python-dotenv

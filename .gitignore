@@ -1,0 +1,24 @@
+# Python & Environment
+.venv/
+__pycache__/
+*.pyc
+.env
+
+# Logging
+*.log
+
+# dbt modules
+transform/target/
+transform/dbt_packages/
+transform/logs/
+transform/dbt_modules/
+
+# Database and Cache
+# IMPORTANT: Do not push your local DuckDB database file
+*.duckdb
+*.db
+data/
+
+# OS Specific
+.DS_Store
+Thumbs.db
