@@ -1,8 +1,12 @@
 # Python & Environment
+.idea/
 .venv/
 __pycache__/
 *.pyc
 .env
+
+# Test File
+test.ipynb
 
 # Logging
 *.log
@@ -17,6 +21,7 @@ transform/dbt_modules/
 # IMPORTANT: Do not push your local DuckDB database file
 *.duckdb
 *.db
+*.duckdb.wal
 data/
 
 # OS Specific
