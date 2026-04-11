@@ -1,0 +1,73 @@
+models:
+  - name: stg_weather_data
+    description: "Silver layer: Cleaned weather data with temperature classification."
+    columns:
+      - name: location_id
+        description: "Primary key for the location."
+        tests:
+          - unique
+          - not_null
+      - name: current_temp_c
+        description: "Temperature in Celsius."
+        tests:
+          - not_null
+      - name: current_temp_f
+        description: "Temperature in Fahrenheit."
+        tests:
+          - not_null
+      - name: temp_severity
+        description: "Categorized severity based on the classify_temp macro."
+        tests:
+          - accepted_values:
+              values: ['Extreme', 'High', 'Moderate', 'Low']
+
+  - name: fact_weather_alerts
+    description: "Gold layer: For notifications. Combines cleaned weather metrics with business logic to categorize public safety risks."
+    columns:
+      - name: city_name
+        description: "The target city for the weather alert."
+        tests:
+          - not_null
+
+      - name: alert_level
+        description: "The risk category generated via the generate_alert macro (Extreme Heat, High Humidity Risk, Severe Weather, Stable)."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Extreme Heat', 'High Humidity Risk', 'Severe Weather', 'Stable']
+
+      - name: heat_gap_c
+        description: "Discomfort index in Celsius (Perceived Temp - Actual Temp). A higher gap indicates higher humidity-induced stress."
+        tests:
+          - not_null
+
+      - name: heat_gap_f
+        description: "Discomfort index in Fahrenheit."
+        tests:
+          - not_null
+
+macros:
+  - name: classify_temp
+    description: "Categorizes temperature into severity buckets (Extreme, High, Moderate, Low)."
+    arguments:
+      - name: temp_c_col
+        description: "The name of the column containing Celsius values."
+
+  - name: celsius_to_fahrenheit
+    description: "Converts Celsius to Fahrenheit with configurable precision."
+    arguments:
+      - name: temp_c_col
+        description: "The name of the column containing Celsius values."
+      - name: precision
+        description: "Number of decimal places (default is 1)."
+
+  - name: generate_alert
+    description: "Provides an alert signal based on conditions like temperature, humidity."
+    arguments:
+      - name: temp_c_col
+        description: "The name of the column containing Celsius values."
+      - name: temp_c_col
+        description: "The name of the column containing Humidity values."
+      - name: condition_col
+        description: "The name of the column containing weather category values."
+

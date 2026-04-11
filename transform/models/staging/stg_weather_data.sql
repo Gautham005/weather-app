@@ -1,22 +1,19 @@
 with source as (
     select * from {{ ref('raw_weather_monitor') }}
-)
+),
 
-select
-    -- Standardizing IDs and Names
+silver as
+(select
     location_id,
     upper(location_name) as city_name,
-
-    -- Ensuring Coordinates are Floats for the UI
-    cast(latitude as float) as lat,
-    cast(longitude as float) as lon,
-
-    -- Weather Metrics
-    temp_celsius as current_temp,
-    feels_like as perceived_temp,
+    temp_celsius as current_temp_c,
+    {{ celsius_to_fahrenheit('temp_celsius') }} as current_temp_f,
+    feels_like as perceived_temp_c,
+    {{ celsius_to_fahrenheit('feels_like') }} as perceived_temp_f,
+    {{ classify_temp('temp_celsius') }} as temp_severity,
     humidity as humidity_pct,
     weather_main as sky_condition,
+    cast(ingested_at as timestamp) as recorded_at
+from source)
 
-    -- Time Handling
-    cast(ingested_at as timestamp) as observation_time
-from source
+select * from silver
