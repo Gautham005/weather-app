@@ -4,7 +4,7 @@ An End-to-End Automated Weather Intelligence Pipeline
 
 Atmo Watchtower is a production-grade ELT (Extract, Load, Transform) platform designed to provide high-frequency weather monitoring and safety alerts. Moving beyond static analysis, it integrates live API ingestion with a modern data stack to transform raw atmospheric data into actionable alerts.
 
-<img alt="AtmoWatchTower_ELT.png" height="300" src="artifacts/AtmoWatchTower_ELT.png" width="600"/>
+<img width="500" height="400" alt="AtmoWatchTower_ELT" src="https://github.com/user-attachments/assets/e72cac9c-c95b-46b2-b844-ff6f0a29716f" />
 
 **[Ingestion Layer]** 
 1. Python Script (OpenWeatherMap API) fetches real-time JSON data.
