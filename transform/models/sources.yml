@@ -1,0 +1,12 @@
+sources:
+  - name: weather_api
+    database: weather_data # This matches your DuckDB filename
+    schema: bronze
+    description: "Raw landing zone for Python API ingestion."
+    tables:
+      - name: weather_stream
+        description: "Live stream of weather data from OpenWeatherMap."
+        loaded_at_field: "recorded_at::timestamp"
+        freshness:
+          warn_after: {count: 6, period: hour}
+          error_after: {count: 24, period: hour}

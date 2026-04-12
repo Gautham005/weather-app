@@ -1,5 +1,5 @@
 with source as (
-    select * from {{ ref('raw_weather_monitor') }}
+    select * from {{ source('weather_api', 'weather_stream') }}
 ),
 
 silver as
@@ -13,7 +13,7 @@ silver as
     {{ classify_temp('temp_celsius') }} as temp_severity,
     humidity as humidity_pct,
     weather_main as sky_condition,
-    cast(ingested_at as timestamp) as recorded_at
+    cast(recorded_at as timestamp) as recorded_at
 from source)
 
 select * from silver

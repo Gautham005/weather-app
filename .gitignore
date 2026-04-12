@@ -27,3 +27,9 @@ data/
 # OS Specific
 .DS_Store
 Thumbs.db
+
+# Artifacts
+artifacts/
+*.png
+*.svg
+*.jpeg
